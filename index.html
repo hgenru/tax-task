@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tax</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <link rel="stylesheet" href="styles/grid.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel='stylesheet' href="http://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin,cyrillic">
+    </head>
+    <body>
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!-- Templates -->
+        <template id="tax-template">
+            <form class="g-col-6">
+                <fieldset>
+                    <legend>Данные плательщика</legend>
+                    <label>
+                        ИНН индивидуальногопредпринимателя
+                        <input id="fld_INN" data-bind="value: inn, valueUpdate: 'afterkeydown'" type="number" autocomplete="on" >
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Данные объекта</legend>
+                    <label>
+                        Адрес торгового объекта
+                        <input id="fld_ADRESS" type="text" autocomplete="on" required>
+                    </label>
+                    <label>
+                        Площадь торгового объекта
+                        <input id="fld_AREA" type="text" autocomplete="on" required>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Данные платежа</legend>
+                    <label>
+                        Сумма уплаченного сбора
+                        <input id="fld_SUM" type="text" autocomplete="on" required>
+                    </label>
+                    <label>
+                        Период (квартал), за который произведена оплата
+                        <input id="fld_PERIOD" type="text" autocomplete="on" required>
+                    </label>
+                    <label>
+                        Дата осуществления платежа
+                        <input id="fld_DATE" type="text" autocomplete="on" required>
+                    </label>
+                </fieldset>
+            </form>
+        </template>
+        <header class="g-row">
+            <h1>Подача сведений об оплате сбора №382-ФЗ</h1>
+        </header>
+        <section data-bind="foreach: taxes">
+            <tax data-bind="
+                value: $data,
+                visible: $root.isCurrentTax($data)">
+            </tax>
+        </section>
+        <nav>
+            <!-- ko foreach: taxes -->
+            <div class="pagination"
+                 data-bind="
+                    text: $index() + 1,
+                    click: $root.currentTax.bind($data),
+                    css: { active: $root.isCurrentTax($data) }">
+            </div>
+            <!-- /ko -->
+            <div class="pagination" data-bind="click: addTax">+</div>
+        </nav>
+        <!-- Load scripts -->
+        <script src="vendor/knockout.js"></script>
+        <script src="vendor/knockout.validation.min.js"></script>
+        <script src="scripts/main.js"></script>
+    </body>
+</html>

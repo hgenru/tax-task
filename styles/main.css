@@ -1,0 +1,26 @@
+body
+{
+    max-width: 960px;
+    margin: 0 auto;
+    font-family: 'Open Sans', sans-serif;
+}
+
+input
+{
+    display: block;
+}
+
+.pagination
+{
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    border: 1px solid #ff0;
+    line-height: 2em;
+    text-align: center;
+}
+
+.pagination.active
+{
+    border-color: red;
+}
