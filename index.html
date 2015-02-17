@@ -5,11 +5,11 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
         <link rel="stylesheet" href="styles/grid.css">
         <link rel="stylesheet" href="styles/main.css">
-        <link rel='stylesheet' href="http://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin,cyrillic">
+        <link rel='stylesheet' href="//fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin,cyrillic">
     </head>
     <body>
         <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <!-- Templates -->
         <template id="tax-template">
@@ -19,6 +19,7 @@
                     <label>
                         ИНН индивидуальногопредпринимателя
                         <input id="fld_INN" data-bind="value: inn, valueUpdate: 'afterkeydown'" type="number" autocomplete="on" >
+                        <span data-bind="validationMessage: inn"></span>
                     </label>
                 </fieldset>
                 <fieldset>
@@ -67,7 +68,10 @@
                     css: { active: $root.isCurrentTax($data) }">
             </div>
             <!-- /ko -->
-            <div class="pagination" data-bind="click: addTax">+</div>
+            <div class="pagination"
+                 data-bind="
+                    click: addTax,
+                    visible: taxes().length < 3">+</div>
         </nav>
         <!-- Load scripts -->
         <script src="vendor/knockout.js"></script>

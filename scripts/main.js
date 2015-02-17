@@ -2,7 +2,12 @@ function Tax() {
     'use strict';
     var self = this;
 
-    self.inn = ko.observable();
+    self.inn = ko.observable().extend({
+        pattern: {
+            message: 'Hey this doesnt match my pattern',
+            params: '^[0-9]+'
+        }
+    });
 
     self.adress = ko.observable();
     self.area = ko.observable();
@@ -49,8 +54,8 @@ var init = function() {
     ko.validation.init({
         registerExtenders: true,
         messagesOnModified: true,
-        insertMessages: true,
-        parseInputAttributes: true
+        insertMessages: false,
+        parseInputAttributes: false
     }, true);
 
     ko.applyBindings(app);
