@@ -2,12 +2,7 @@ function Tax() {
     'use strict';
     var self = this;
 
-    self.inn = ko.observable().extend({
-        pattern: {
-            message: 'Hey this doesnt match my pattern',
-            params: '^[0-9]+'
-        }
-    });
+    self.inn = ko.observable().extend({innValidator: true});
 
     self.adress = ko.observable();
     self.area = ko.observable();
@@ -15,8 +10,6 @@ function Tax() {
     self.sum = ko.observable();
     self.period = ko.observable();
     self.date = ko.observable();
-
-    ko.validatedObservable(self);
 }
 
 ko.components.register('tax', {
@@ -50,14 +43,6 @@ var init = function() {
     var tax = new Tax();
     app.taxes.push(tax);
     app.currentTax(tax);
-
-    ko.validation.init({
-        registerExtenders: true,
-        messagesOnModified: true,
-        insertMessages: false,
-        parseInputAttributes: false
-    }, true);
-
     ko.applyBindings(app);
 };
 
