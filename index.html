@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="styles/grid.css">
         <link rel="stylesheet" href="styles/main.css">
         <link rel='stylesheet' href="//fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin,cyrillic">
+        <!-- vendor css -->
+        <link rel="stylesheet" href="vendor/jquery.kladr.min.css">
     </head>
     <body>
         <!--[if lt IE 9]>
@@ -26,7 +28,7 @@
                     <legend>Данные объекта</legend>
                     <label>
                         Адрес торгового объекта
-                        <input id="fld_ADRESS" type="text" autocomplete="on" required>
+                        <input id="fld_ADRESS" data-bind="value: adress, kladr: {}" type="text" autocomplete="on" required>
                     </label>
                     <label>
                         Площадь торгового объекта
@@ -74,7 +76,10 @@
                     visible: taxes().length < 3">+</div>
         </nav>
         <!-- Load scripts -->
+        <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script src="vendor/jquery.kladr.min.js"></script>
         <script src="vendor/knockout.js"></script>
+        <script src="scripts/bindings.js"></script>
         <script src="scripts/validators.js"></script>
         <script src="scripts/main.js"></script>
     </body>
