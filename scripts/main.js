@@ -5,7 +5,7 @@ function Tax() {
     self.inn = ko.observable().extend({innValidator: true});
 
     self.adress = ko.observable();
-    self.area = ko.observable();
+    self.area = ko.observable().extend({numeric: 2});
 
     self.sum = ko.observable();
     self.period = ko.observable();
