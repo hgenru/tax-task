@@ -6,14 +6,14 @@ var http = require("http");
 
 var app = express();
 
-process.env.PWD = process.cwd()
+var home_dir = __dirname;
 
-app.use('/', express.static(process.env.PWD + '/'));  
-app.use(express.static(process.env.PWD + '/')); 
+app.use('/', express.static(home_dir + '/'));  
+app.use(express.static(home_dir + '/')); 
 
 app.post('/receive', function(request, respond) {
     var body = '';
-    filePath = process.env.PWD + '/receivedData.csv';
+    filePath = home_dir + '/receivedData.csv';
     request.on('data', function(data) {
         body += data;
     });
