@@ -25,11 +25,12 @@ app.post('/receive', function(request, respond) {
     });
 });
 
-var port = normalizePort(process.env.PORT || '8081');
+var server_port = normalizePort(process.env.OPENSHIFT_NODEJS_PORT || 8080);
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var server = http.createServer(app);
 server.on('error', onError);
 server.on('listening', onListening);
-server.listen(port);
+server.listen(port, server_ip_address);
 
 function normalizePort(val) {
     var port = parseInt(val, 10);
