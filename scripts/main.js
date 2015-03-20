@@ -105,6 +105,7 @@ var init = function() {
         messagesOnModified: true,
         insertMessages: true,
         messageTemplate: null,
+        parseInputAttributes: false,
         errorElementClass: 'has-error',
         errorMessageClass: 'help-block'
     }, true);
