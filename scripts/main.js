@@ -46,16 +46,18 @@ App.prototype.deleteTax = function(tax) {
 };
 
 App.prototype.checkAllErrors = function() {
-    var taxes = this.taxes();
     var allTaxesIsValid = true;
     var errorTax;
-    taxes.forEach(function(tax) {
+    var taxes = this.taxes();
+    var taxesI;
+    for (taxesI = 0; taxesI < taxes.length; taxesI++) {
+        var tax = taxes[taxesI];
         if (!tax.isValid()) {
             tax.errors.showAllMessages();
             errorTax = tax;
             allTaxesIsValid = false;
         }
-    });
+    }
     if (errorTax) {
         this.currentTax(errorTax);
     }

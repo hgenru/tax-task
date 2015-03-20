@@ -144,10 +144,8 @@
                                 </a>
                             </li>
                         <!-- /ko -->
-                        <li data-bind="
-                                    click: addTax,
-                                    visible: taxes().length < 3">
-                            <a href="#">+</a>
+                        <li data-bind="isible: taxes().length < 3">
+                            <a href="#" data-bind="click: addTax">+</a>
                         </li>
                         </ul>
                 </nav>
