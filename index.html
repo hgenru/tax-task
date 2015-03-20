@@ -135,11 +135,11 @@
                             <li role="presentation" data-bind="
                                         click: $root.currentTax.bind($data),
                                         css: { active: $root.isCurrentTax($data) }">
-                                <a href="#">
-                                    Отчет <sapn data-bind="text: $index() + 1"></sapn>
+                                <a href="#">Отчет <span data-bind="text: $index() + 1"></span>
                                     <span class="error-tab-text" data-bind="visible: !$data.isValid()">*</span>
                                     <span class="button-x" data-bind="
                                         click: $root.deleteTax.bind($root),
+                                        clickBubble: false,
                                         visible: $root.taxes().length > 1">x</span>
                                 </a>
                             </li>
@@ -147,7 +147,7 @@
                         <li data-bind="visible: taxes().length < 3">
                             <a href="#" data-bind="click: addTax">+</a>
                         </li>
-                        </ul>
+                    </ul>
                 </nav>
             </div>
             <div class="row">
@@ -171,7 +171,6 @@
               </div>
             </div>
         </div>
-
 
         <div id="failureModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="failureModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-md">

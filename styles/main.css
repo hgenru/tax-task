@@ -75,6 +75,11 @@ legend
     text-align: center;
 }
 
+.modal-md
+{
+    max-width: 80%;
+}
+
 .nav-tabs
 {
     border-bottom: 0px;
