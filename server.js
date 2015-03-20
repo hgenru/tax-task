@@ -21,4 +21,6 @@ app.post('/receive', function(request, respond) {
     });
 });
 
+console.log('Starting server at: ' + process.env.PORT || 5000);
+
 app.listen(process.env.PORT || 5000);
