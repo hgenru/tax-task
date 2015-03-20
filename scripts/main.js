@@ -5,9 +5,9 @@ function Tax() {
     self.inn = ko.observable('').extend({ innLength: true, required: true, innChecksum: true });
 
     self.adress = ko.observable().extend({ required: true });
-    self.area = ko.observable(0).extend({ numeric: 2, required: true });
+    self.area = ko.observable().extend({ numeric: 2, numericPositiveAndNotZero: true, required: true });
 
-    self.sum = ko.observable(0).extend({ numeric: 2, required: true });
+    self.sum = ko.observable().extend({ numeric: 2, numericPositiveAndNotZero: true, required: true });
     self.periodYear = ko.observable().extend({ required: true });
     self.periodQuarter = ko.observable().extend({ required: true });
     self.date = ko.observable().extend({ required: true });
@@ -74,11 +74,12 @@ App.prototype.sendRequest = function() {
             var row = [
                 tax.inn().replace(/[^\d.]/g, ''),
                 '"' + tax.adress() + '"',
-                tax.area(),
-                tax.sum(),
+                // WTF? Зачем запятые заменять-то?
+                tax.area().toString().replace('.', ','),
+                tax.sum().toString().replace('.', ','),
                 tax.periodYear() + '-' + tax.periodQuarter(),
                 tax.date()
-            ].join(',');
+            ].join(';');
             result.push(row);
         }
         result = result.join('\n');

@@ -3,7 +3,8 @@ ko.extenders.numeric = function(target, precision) {
         read: target,
         write: function(newValue) {
             newValue = newValue || '';
-            newValue.replace(',', '.');
+            newValue = newValue.replace(',', '.');
+            newValue = newValue.replace(/[^\d.]/g, '');
             var current = target();
             var roundingMultiplier = Math.pow(10, precision);
             var newValueAsNum = isNaN(newValue) ? 0 : parseFloat(+newValue);
@@ -23,7 +24,7 @@ ko.extenders.numeric = function(target, precision) {
 
 ko.validation.rules['innLength'] = {
     validator: function (val) {
-        var numVal = val.replace(/[^\d.]/g, '')
+        var numVal = val.replace(/[^\d.]/g, '');
         return numVal.length === 12 || numVal.length === 10;
     },
     message: 'ИНН должен быть длиной в 10 или 12 символов.'
@@ -59,4 +60,13 @@ ko.validation.rules['innChecksum'] = {
         }
     },
     message: 'Ввёден невалидный ИНН.'
+};
+
+ko.validation.rules['numericPositiveAndNotZero'] = {
+    validator: function (val) {
+        // Современные браузеры нам и так число вернут, но мы подстрахуемся
+        var numVal = val.toString().replace(/[^\d.]/g, '');
+        return numVal > 0;
+    },
+    message: 'Число в этом поле должно быть больше нуля.'
 };
