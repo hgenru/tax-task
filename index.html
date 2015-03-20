@@ -16,6 +16,7 @@
     <body>
         <!--[if lt IE 9]>
             <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.0/es5-sham.min.js"></script>
         <![endif]-->
         <!-- Templates -->
         <script type="text/template" id="tax-template">
@@ -53,6 +54,7 @@
                             <label data-bind="attr: { for: 'fld_AREA' + $index }">
                                 Площадь торгового объекта (в метрах квадратных)
                             </label>
+                            <!-- input type:number не позволяет мне подключить обычный masked-input плагин, зато он упрощает ввод на мобильных устройствах и средствами браузера валидирует значение -->
                             <input class="fld_AREA form-control" type="number" step="any" autocomplete="on" required data-bind="
                                 attr: { id: 'fld_AREA' + $index },
                                 value: area">
@@ -189,6 +191,12 @@
               </div>
             </div>
         </div>
+
+        <footer class="bs-docs-footer">
+            <div class="container">
+                <div class="col-lg-12 credentials"><p class="center">2014, <a href="http://hgen.ru" target="_blank">hgen</a></p></div>
+            </div>
+        </footer>
 
         <!-- Load vendor scripts -->
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
