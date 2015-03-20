@@ -5,6 +5,9 @@
   "license": "MIT",
   "main": "index.js",
   "repository": "hgenru/tax-task",
+  "scripts": {
+    "start": "node server.js"
+  },
   "author": {
     "name": "Alexander Plesovskikh",
     "email": "me@hgen.ru",
