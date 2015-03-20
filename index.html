@@ -3,11 +3,15 @@
     <head>
         <title>Tax</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <link rel="stylesheet" href="styles/grid.css">
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel='stylesheet' href="//fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin,cyrillic">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <!-- fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
         <!-- vendor css -->
         <link rel="stylesheet" href="vendor/jquery.kladr.min.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <!-- project css -->
+        <link rel="stylesheet" href="styles/main.css">
     </head>
     <body>
         <!--[if lt IE 9]>
@@ -15,70 +19,189 @@
         <![endif]-->
         <!-- Templates -->
         <script type="text/template" id="tax-template">
-            <form class="g-col-6">
+            <form>
                 <fieldset>
                     <legend>Данные плательщика</legend>
-                    <label>
-                        ИНН индивидуальногопредпринимателя
-                        <input id="fld_INN" data-bind="value: inn, valueUpdate: 'afterkeydown'" type="number" autocomplete="on" >
-                        <span data-bind="validationMessage: inn"></span>
-                    </label>
+                    <section class="col-lg-12">
+                        <div class="form-group" data-bind="validationElement: inn">
+                            <label data-bind="attr: { for: 'fld_INN_' + $index }">
+                                ИНН индивидуального предпринимателя
+                            </label>
+                            <input class="fld_INN form-control disable-appearance" type="text" pattern="[0-9]*" autocomplete="on" data-bind="
+                                attr: { id: 'fld_INN_' + $index },
+                                value: inn,
+                                valueUpdate: 'keyup',
+                                formatter: {
+                                    pattern: '{{999}}-{{999}}-{{999}}-{{999}}'
+                                }">
+                        </div>
+                    </section>
                 </fieldset>
                 <fieldset>
                     <legend>Данные объекта</legend>
-                    <label>
-                        Адрес торгового объекта
-                        <input id="fld_ADRESS" data-bind="value: adress, kladr: {}" type="text" autocomplete="on" required>
-                    </label>
-                    <label>
-                        Площадь торгового объекта (в метрах квадратных)
-                        <input id="fld_AREA" data-bind="value: area" type="number" autocomplete="on" required>
-                    </label>
+                    <section class="col-lg-12">
+                        <div class="form-group" data-bind="validationElement: adress">
+                            <label data-bind="attr: { for: 'fld_ADRESS' + $index }">
+                                Адрес торгового объекта
+                            </label>
+                            <input class="fld_ADRESS form-control" type="text" autocomplete="on" required data-bind="
+                                attr: { id: 'fld_ADRESS' + $index },
+                                value: adress,
+                                kladr: {}">
+                        </div>
+                        <div class="form-group" data-bind="validationElement: area">
+                            <label data-bind="attr: { for: 'fld_AREA' + $index }">
+                                Площадь торгового объекта (в метрах квадратных)
+                            </label>
+                            <input class="fld_AREA form-control" type="number" step="any" autocomplete="on" required data-bind="
+                                attr: { id: 'fld_AREA' + $index },
+                                value: area">
+                        </div>
+                    </section>
                 </fieldset>
                 <fieldset>
                     <legend>Данные платежа</legend>
-                    <label>
-                        Сумма уплаченного сбора (в рублях)
-                        <input id="fld_SUM" type="number" autocomplete="on" required>
-                    </label>
-                    <label>
-                        Период (квартал), за который произведена оплата
-                        <input id="fld_PERIOD" type="text" autocomplete="on" required>
-                    </label>
-                    <label>
-                        Дата осуществления платежа
-                        <input id="fld_DATE" type="text" autocomplete="on" required>
-                    </label>
+                    <section class="col-lg-12">
+                        <div class="form-group" data-bind="validationElement: sum">
+                            <label data-bind="attr: { for: 'fld_SUM' + $index }">
+                                Сумма уплаченного сбора (рубли, копейки)
+                            </label>
+                            <input class="fld_SUM form-control" type="number" step="any" autocomplete="on" required data-bind="
+                                attr: { id: 'fld_SUM' + $index },
+                                value: sum">
+                        </div>
+                        <div class="form-group period">
+                            <div class="period-cell">
+                                <label data-bind="attr: { for: 'fld_PERIOD_Year' + $index }">
+                                    Отчетный год
+                                </label>
+                                <select class="fld_PERIOD_Year form-control" data-bind="
+                                    attr: { id: 'fld_PERIOD_Year' + $index },
+                                    value: periodYear">
+                                  <option>2015</option>
+                                  <option>2016</option>
+                                  <option>2017</option>
+                                  <option>2018</option>
+                                  <option>2019</option>
+                                  <option>2020</option>
+                                </select>
+                            </div>
+                            <div class="period-cell" style="width: 5%"></div>
+                            <div class="period-cell">
+                                <label data-bind="attr: { for: 'fld_PERIOD_Quarter' + $index }">
+                                    Квартал
+                                </label>
+                                <select class="fld_PERIOD_Quarter form-control" data-bind="
+                                    attr: { id: 'fld_PERIOD_Quarter' + $index },
+                                    value: periodQuarter">
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" data-bind="validationElement: date">
+                            <label data-bind="attr: { for: 'fld_DATE' + $index }">
+                                Дата осуществления платежа
+                            </label>
+                            <input class="fld_DATE form-control" type="text" autocomplete="on" required data-bind="
+                                attr: { id: 'fld_DATE' + $index },
+                                value: date,
+                                datepicker: {}">
+                        </div>
+                    </section>
                 </fieldset>
             </form>
         </script>
-        <header class="g-row">
-            <h1>Подача сведений об оплате сбора №382-ФЗ</h1>
-        </header>
-        <section data-bind="foreach: taxes">
-            <tax data-bind="
-                value: $data,
-                visible: $root.isCurrentTax($data)">
-            </tax>
-        </section>
-        <nav>
-            <!-- ko foreach: taxes -->
-            <div class="pagination"
-                 data-bind="
-                    text: $index() + 1,
-                    click: $root.currentTax.bind($data),
-                    css: { active: $root.isCurrentTax($data) }">
+
+        <div class="container">
+            <header class="page-header">
+                <h2>Подача сведений об оплате сбора №382-ФЗ</h2>
+            </header>
+            <!-- <div class="jumbotron jumbotron-colored"> -->
+                <div class="tabbable">
+                    <section class="tab-content" data-bind="foreach: taxes">
+                        <div class="tab-pane " data-bind="
+                            value: $data,
+                            css: { active: $root.isCurrentTax($data) },
+                            template: 'tax-template'">
+                        </div>
+                    </section>
+                    <nav>
+                        <ul class="nav nav-tabs">
+                            <!-- ko foreach: taxes -->
+                                <li role="presentation" data-bind="
+                                            click: $root.currentTax.bind($data),
+                                            css: { active: $root.isCurrentTax($data) }">
+                                    <a href="#">
+                                        Отчет <sapn data-bind="
+                                            text: $index() + 1"></sapn>
+                                        <span class="error-tab-text" data-bind="visible: !$data.isValid()">*</span>
+                                        <span class="button-x" data-bind="
+                                            click: $root.deleteTax.bind($root),
+                                            visible: $root.taxes().length > 1">x</span>
+                                    </a>
+                                </li>
+                            <!-- /ko -->
+                            <li data-bind="
+                                        click: addTax,
+                                        visible: taxes().length < 3">
+                                <a href="#">+</a>
+                            </li>
+                            </ul>
+                    </nav>
+                </div>
+                <div class="row">
+                    <div class="from-group col-lg-12">
+                        <button type="button" class="btn btn-primary btn-default pull-right" data-bind="
+                            click: sendRequest">Отправить</button>
+                    </div>
+                </div>
             </div>
-            <!-- /ko -->
-            <div class="pagination"
-                 data-bind="
-                    click: addTax,
-                    visible: taxes().length < 3">+</div>
-        </nav>
-        <!-- Load scripts -->
+        <!-- </div> -->
+
+        <div id="sucessModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="sucessModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title" id="sucessModalLabel">Ваш отчёт успешно соранён!<a class="anchorjs-link" href="#sucessModalLabel"><span class="anchorjs-icon"></span></a></h4>
+                </div>
+                <div class="modal-body">
+                  Отчет в формате <i>csv</i> можно скачать по этой <a href="/receivedData.csv">ссылке</a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        <div id="failureModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="failureModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title" id="failureModalLabel">Ошибка сохранения отчета<a class="anchorjs-link" href="#failureModalLabel"><span class="anchorjs-icon"></span></a></h4>
+                </div>
+                <div class="modal-body">
+                  При сохранении отчета произошла ошибка. Пожалуйста, проверьте своё соединение с интернетом.
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Load vendor scripts -->
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="vendor/jquery.kladr.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.ru.min.js"></script>
+        <script src="vendor/formatter.js"></script>
         <script src="vendor/knockout.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.2/knockout.validation.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.2/localization/ru-RU.js"></script>
+        <!-- Load main scripts -->
         <script src="scripts/bindings.js"></script>
         <script src="scripts/validators.js"></script>
         <script src="scripts/main.js"></script>

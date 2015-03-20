@@ -1,0 +1,26 @@
+{
+  "name": "tax-task",
+  "version": "0.0.0",
+  "description": "webapp",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": "hgenru/tax-task",
+  "author": {
+    "name": "Alexander Plesovskikh",
+    "email": "me@hgen.ru",
+    "url": "https://github.com/hgenru"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "dependencies": {
+    "express": "^4.12.3"
+  },
+  "devDependencies": {}
+}
