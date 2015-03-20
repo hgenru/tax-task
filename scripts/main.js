@@ -39,11 +39,11 @@ App.prototype.addTax = function() {
 };
 
 App.prototype.deleteTax = function(tax) {
-    console.log(tax, this.taxes)
+    console.log(tax, this.taxes);
     this.taxes.remove(tax);
     var taxes = this.taxes();
     this.currentTax(taxes[taxes.length - 1]);
-}
+};
 
 App.prototype.checkAllErrors = function() {
     var taxes = this.taxes();
@@ -60,12 +60,11 @@ App.prototype.checkAllErrors = function() {
         this.currentTax(errorTax);
     }
     return allTaxesIsValid;
-}
+};
 
 App.prototype.sendRequest = function() {
     var allTaxesIsValid = this.checkAllErrors();
     if (allTaxesIsValid) {
-        var self = this;
         var result = [];
         var taxesI;
         var taxes = this.taxes();
