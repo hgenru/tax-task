@@ -23,7 +23,7 @@
             <form>
                 <fieldset>
                     <legend>Данные плательщика</legend>
-                    <section class="col-lg-12">
+                    <div class="col-lg-12">
                         <div class="form-group" data-bind="validationElement: inn">
                             <label data-bind="attr: { for: 'fld_INN_' + $index }">
                                 ИНН индивидуального предпринимателя
@@ -36,11 +36,11 @@
                                     pattern: '{{999}}-{{999}}-{{999}}-{{999}}'
                                 }">
                         </div>
-                    </section>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend>Данные объекта</legend>
-                    <section class="col-lg-12">
+                    <div class="col-lg-12">
                         <div class="form-group" data-bind="validationElement: adress">
                             <label data-bind="attr: { for: 'fld_ADRESS' + $index }">
                                 Адрес торгового объекта
@@ -59,11 +59,11 @@
                                 attr: { id: 'fld_AREA' + $index },
                                 value: area">
                         </div>
-                    </section>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend>Данные платежа</legend>
-                    <section class="col-lg-12">
+                    <div class="col-lg-12">
                         <div class="form-group" data-bind="validationElement: sum">
                             <label data-bind="attr: { for: 'fld_SUM' + $index }">
                                 Сумма уплаченного сбора (рубли, копейки)
@@ -112,56 +112,53 @@
                                 value: date,
                                 datepicker: {}">
                         </div>
-                    </section>
+                    </div>
                 </fieldset>
             </form>
         </script>
 
-        <div class="container">
+        <section class="container">
             <header class="page-header">
                 <h2>Подача сведений об оплате сбора №382-ФЗ</h2>
             </header>
-            <!-- <div class="jumbotron jumbotron-colored"> -->
-                <div class="tabbable">
-                    <section class="tab-content" data-bind="foreach: taxes">
-                        <div class="tab-pane " data-bind="
-                            value: $data,
-                            css: { active: $root.isCurrentTax($data) },
-                            template: 'tax-template'">
-                        </div>
-                    </section>
-                    <nav>
-                        <ul class="nav nav-tabs">
-                            <!-- ko foreach: taxes -->
-                                <li role="presentation" data-bind="
-                                            click: $root.currentTax.bind($data),
-                                            css: { active: $root.isCurrentTax($data) }">
-                                    <a href="#">
-                                        Отчет <sapn data-bind="
-                                            text: $index() + 1"></sapn>
-                                        <span class="error-tab-text" data-bind="visible: !$data.isValid()">*</span>
-                                        <span class="button-x" data-bind="
-                                            click: $root.deleteTax.bind($root),
-                                            visible: $root.taxes().length > 1">x</span>
-                                    </a>
-                                </li>
-                            <!-- /ko -->
-                            <li data-bind="
-                                        click: addTax,
-                                        visible: taxes().length < 3">
-                                <a href="#">+</a>
-                            </li>
-                            </ul>
-                    </nav>
-                </div>
-                <div class="row">
-                    <div class="from-group col-lg-12">
-                        <button type="button" class="btn btn-primary btn-default pull-right" data-bind="
-                            click: sendRequest">Отправить</button>
+            <div class="tabbable">
+                <div class="tab-content" data-bind="foreach: taxes">
+                    <div class="tab-pane " data-bind="
+                        value: $data,
+                        css: { active: $root.isCurrentTax($data) },
+                        template: 'tax-template'">
                     </div>
                 </div>
+                <nav>
+                    <ul class="nav nav-tabs">
+                        <!-- ko foreach: taxes -->
+                            <li role="presentation" data-bind="
+                                        click: $root.currentTax.bind($data),
+                                        css: { active: $root.isCurrentTax($data) }">
+                                <a href="#">
+                                    Отчет <sapn data-bind="text: $index() + 1"></sapn>
+                                    <span class="error-tab-text" data-bind="visible: !$data.isValid()">*</span>
+                                    <span class="button-x" data-bind="
+                                        click: $root.deleteTax.bind($root),
+                                        visible: $root.taxes().length > 1">x</span>
+                                </a>
+                            </li>
+                        <!-- /ko -->
+                        <li data-bind="
+                                    click: addTax,
+                                    visible: taxes().length < 3">
+                            <a href="#">+</a>
+                        </li>
+                        </ul>
+                </nav>
             </div>
-        <!-- </div> -->
+            <div class="row">
+                <div class="from-group col-lg-12">
+                    <button type="button" class="btn btn-primary btn-default pull-right" data-bind="
+                        click: sendRequest">Отправить</button>
+                </div>
+            </div>
+        </section>
 
         <div id="sucessModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="sucessModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-md">
