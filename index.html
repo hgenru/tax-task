@@ -25,7 +25,7 @@
                     <legend>Данные плательщика</legend>
                     <div class="col-lg-12">
                         <div class="form-group" data-bind="validationElement: inn">
-                            <label data-bind="attr: { for: 'fld_INN_' + $index }">
+                            <label data-bind="attr: { 'for': 'fld_INN_' + $index }">
                                 ИНН индивидуального предпринимателя
                             </label>
                             <input class="fld_INN form-control disable-appearance" type="text" pattern="[0-9]*" autocomplete="on" data-bind="
@@ -42,7 +42,7 @@
                     <legend>Данные объекта</legend>
                     <div class="col-lg-12">
                         <div class="form-group" data-bind="validationElement: adress">
-                            <label data-bind="attr: { for: 'fld_ADRESS' + $index }">
+                            <label data-bind="attr: { 'for': 'fld_ADRESS' + $index }">
                                 Адрес торгового объекта
                             </label>
                             <input class="fld_ADRESS form-control" type="text" autocomplete="on" required data-bind="
@@ -51,7 +51,7 @@
                                 kladr: {}">
                         </div>
                         <div class="form-group" data-bind="validationElement: area">
-                            <label data-bind="attr: { for: 'fld_AREA' + $index }">
+                            <label data-bind="attr: { 'for': 'fld_AREA' + $index }">
                                 Площадь торгового объекта (в метрах квадратных)
                             </label>
                             <!-- input type:number не позволяет мне подключить обычный masked-input плагин, зато он упрощает ввод на мобильных устройствах и средствами браузера валидирует значение -->
@@ -65,7 +65,7 @@
                     <legend>Данные платежа</legend>
                     <div class="col-lg-12">
                         <div class="form-group" data-bind="validationElement: sum">
-                            <label data-bind="attr: { for: 'fld_SUM' + $index }">
+                            <label data-bind="attr: { 'for': 'fld_SUM' + $index }">
                                 Сумма уплаченного сбора (рубли, копейки)
                             </label>
                             <input class="fld_SUM form-control" type="number" step="any" autocomplete="on" required data-bind="
@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group period">
                             <div class="period-cell">
-                                <label data-bind="attr: { for: 'fld_PERIOD_Year' + $index }">
+                                <label data-bind="attr: { 'for': 'fld_PERIOD_Year' + $index }">
                                     Отчетный год
                                 </label>
                                 <select class="fld_PERIOD_Year form-control" data-bind="
@@ -90,7 +90,7 @@
                             </div>
                             <div class="period-cell" style="width: 5%"></div>
                             <div class="period-cell">
-                                <label data-bind="attr: { for: 'fld_PERIOD_Quarter' + $index }">
+                                <label data-bind="attr: { 'for': 'fld_PERIOD_Quarter' + $index }">
                                     Квартал
                                 </label>
                                 <select class="fld_PERIOD_Quarter form-control" data-bind="
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="form-group" data-bind="validationElement: date">
-                            <label data-bind="attr: { for: 'fld_DATE' + $index }">
+                            <label data-bind="attr: { 'for': 'fld_DATE' + $index }">
                                 Дата осуществления платежа
                             </label>
                             <input class="fld_DATE form-control" type="text" autocomplete="on" required data-bind="
